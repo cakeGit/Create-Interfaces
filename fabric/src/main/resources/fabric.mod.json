@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "create_interfaces",
   "version": "${version}",
-  "name": "Example Mod",
+  "name": "Create: Interfaces",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -16,12 +16,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "com.cak.interfaces.fabric.CreateInterfacesFabric"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "create_interfaces.mixins.json",
+    "create_interfaces.common.mixins.json"
   ],
   "depends": {
     "minecraft": "${minecraft_version}",

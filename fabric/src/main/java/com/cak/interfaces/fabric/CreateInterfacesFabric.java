@@ -1,19 +1,21 @@
-package net.examplemod.fabric;
+package com.cak.interfaces.fabric;
 
+import com.cak.interfaces.CIRegistry;
+import com.cak.interfaces.CreateInterfaces;
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
-import net.examplemod.ExampleBlocks;
-import net.examplemod.ExampleMod;
 import net.fabricmc.api.ModInitializer;
 
-public class ExampleModFabric implements ModInitializer {
+public class CreateInterfacesFabric implements ModInitializer {
+    
     @Override
     public void onInitialize() {
-        ExampleMod.init();
-        ExampleMod.LOGGER.info(EnvExecutor.unsafeRunForDist(
+        CreateInterfaces.init();
+        CreateInterfaces.LOGGER.info(EnvExecutor.unsafeRunForDist(
                 () -> () -> "{} is accessing Porting Lib on a Fabric client!",
                 () -> () -> "{} is accessing Porting Lib on a Fabric server!"
-                ), ExampleMod.NAME);
+                ), CreateInterfaces.NAME);
         // on fabric, Registrates must be explicitly finalized and registered.
-        ExampleBlocks.REGISTRATE.register();
+        CIRegistry.REGISTRATE.register();
     }
+    
 }
