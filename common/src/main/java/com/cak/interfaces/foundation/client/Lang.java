@@ -1,4 +1,4 @@
-package com.cak.interfaces.foundation;
+package com.cak.interfaces.foundation.client;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

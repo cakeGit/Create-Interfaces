@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench by cak :)",
+	"textures": {
+		"0": "create_interfaces:item/configurable_controller/lever_component_lever",
+		"particle": "create_interfaces:item/configurable_controller/lever_component_lever"
+	},
+	"elements": [
+		{
+			"from": [-0.5, -1, -0.5],
+			"to": [0.5, 4, 0.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 1.5, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 5], "texture": "#0"},
+				"east": {"uv": [1, 0, 2, 5], "texture": "#0"},
+				"south": {"uv": [2, 0, 3, 5], "texture": "#0"},
+				"west": {"uv": [3, 0, 4, 5], "texture": "#0"},
+				"up": {"uv": [5, 1, 4, 0], "texture": "#0"},
+				"down": {"uv": [5, 1, 4, 2], "texture": "#0"}
+			}
+		}
+	]
+}
