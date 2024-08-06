@@ -4,7 +4,7 @@ loaderVersion = "[${forge_version},)"
 license = "Insert License Here"
 
 [[mods]]
-modId = "create_interfaces"
+modId = "create_configurable"
 version = "${version}"
 displayName = "Create: Interfaces"
 authors = "Me!"
@@ -13,21 +13,21 @@ This is an example description! Tell everyone what your mod is about!
 '''
 logoFile = "icon.png"
 
-[[dependencies.create_interfaces]]
+[[dependencies.create_configurable]]
 modId = "forge"
 mandatory = true
 versionRange = "[${forge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.create_interfaces]]
+[[dependencies.create_configurable]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_version}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.create_interfaces]]
+[[dependencies.create_configurable]]
 modId="create"
 mandatory=true
 versionRange="${create_version}"

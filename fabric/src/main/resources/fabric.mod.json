@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "create_interfaces",
+  "id": "one_with_the_machine",
   "version": "${version}",
-  "name": "Create: Interfaces",
+  "name": "Create: One With The Machine",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -16,12 +16,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.cak.interfaces.fabric.CreateInterfacesFabric"
+      "com.cak.configurable.fabric.CreateInterfacesFabric"
     ]
   },
   "mixins": [
-    "create_interfaces.mixins.json",
-    "create_interfaces.common.mixins.json"
+    "create_configurable.mixins.json",
+    "create_configurable.common.mixins.json"
   ],
   "depends": {
     "minecraft": "${minecraft_version}",
