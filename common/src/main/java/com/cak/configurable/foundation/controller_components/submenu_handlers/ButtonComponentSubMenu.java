@@ -15,7 +15,7 @@ public class ButtonComponentSubMenu extends PlacedComponentSubMenu {
     
     @Override
     public void render(GuiGraphics graphics, int x, int y, int mouseX, int mouseY) {
-        renderComponentSpriteSheetSection(graphics, x, y, 3, 0, 1, 1);
+        renderComponentSpriteSheetSection(graphics, x, y, 0, 0, 1, 1);
     }
     
 }

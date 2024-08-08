@@ -5,6 +5,7 @@ import com.cak.configurable.foundation.controller_components.ControllerComponent
 import com.jozufozu.flywheel.util.Pair;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 
 public abstract class PlacedComponentSubMenu {
@@ -28,5 +29,9 @@ public abstract class PlacedComponentSubMenu {
     }
     
     abstract public void render(GuiGraphics graphics, int x, int y, int mouseX, int mouseY);
+    
+    public CompoundTag getTag() {
+        return tag;
+    }
     
 }

@@ -2,7 +2,9 @@ package com.cak.configurable.content.configurable_controller.menu;
 
 import com.cak.configurable.content.configurable_controller.ConfigurableControllerItem;
 import com.cak.configurable.foundation.controller_components.ControllerComponent;
+import com.jozufozu.flywheel.util.Pair;
 import com.simibubi.create.foundation.gui.menu.MenuBase;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +35,7 @@ public class ConfigurableControllerMenu extends MenuBase<ItemStack> {
     protected void initAndReadInventory(ItemStack contentHolder) {
         if (!(contentHolder.getItem() instanceof ConfigurableControllerItem controllerItem)) throw new AssertionError("Opened a configurable controller menu on a non controller item");
         
-        ControllerComponent.forEachComponentOfTag(contentHolder.getOrCreateTag(), (component, tag) -> {
+        ControllerComponent.forEachComponentOfTag(contentHolder.getOrCreateTag().getCompound("controller_components"), (component, tag) -> {
             components.add(component.getSubMenuFactory().apply(
                 ControllerComponent.getPositionOfComponent(tag),
                 component, tag, this
@@ -47,13 +49,18 @@ public class ConfigurableControllerMenu extends MenuBase<ItemStack> {
             this.addSlot(new Slot(playerInventory, hotbarSlot, 24 + hotbarSlot * 18, 200));
     }
     
-    public void onComponentPlaced() {
-    
+    public void placeComponent(Pair<Integer, Integer> position, ControllerComponent<?> component) {
+        CompoundTag tag = ControllerComponent.createInitialTag(component);
+        components.add(component.getSubMenuFactory().apply(position, component, tag, this));
+        saveData(contentHolder);
     }
     
     @Override
     protected void saveData(ItemStack contentHolder) {
-    
+        CompoundTag tag = new CompoundTag();
+        ControllerComponent.writePlacedComponentsToTag(components, tag);
+        contentHolder.getOrCreateTag().put("controller_components", tag);
+        
     }
     
     @Override

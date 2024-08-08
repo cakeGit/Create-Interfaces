@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
 public class ConfigurableControllerScreen extends AbstractSimiContainerScreen<ConfigurableControllerMenu> {
     
@@ -45,7 +46,9 @@ public class ConfigurableControllerScreen extends AbstractSimiContainerScreen<Co
         super.render(graphics, mouseX, mouseY, partialTicks);
         
         for (PlacedComponentSubMenu component : menu.components) {
-            component.render(graphics, leftPos + gridTopX, topPos + gridTopY, mouseX, mouseY);
+            Pair<Integer, Integer> position = component.position;
+            
+            component.render(graphics, leftPos + gridTopX + position.first() * 42, topPos + gridTopY + position.second() * 42, mouseX, mouseY);
         }
         
         ControllerComponent<?> heldComponent = ControllerComponents.fromItem(menu.getCarried().getItem());
@@ -64,10 +67,7 @@ public class ConfigurableControllerScreen extends AbstractSimiContainerScreen<Co
                     currentCellPos.first() + x,
                     currentCellPos.second() + y
                 );
-                if (
-                    (thisCellPos.first() < 0 || thisCellPos.first() > 4) ||
-                        (thisCellPos.second() < 0 || thisCellPos.second() > 3)
-                ) continue;
+                if (!isValidCellPos(thisCellPos)) continue;
                 
                 graphics.blit(SELECTION,
                     leftPos + gridTopX + 42 * currentCellPos.first(),
@@ -76,6 +76,24 @@ public class ConfigurableControllerScreen extends AbstractSimiContainerScreen<Co
             }
         
         graphics.setColor(1f, 1f, 1f, 1f);
+    }
+    
+    public static boolean isValidCellPos(Pair<Integer, Integer> cellPos) {
+        return ((cellPos.first() >= 0 && cellPos.first() <= 4) &&
+            (cellPos.second() >= 0 && cellPos.second() <= 3));
+    }
+    
+    @Override
+    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        Pair<Integer, Integer> cellPos = screenToCellPos((int) pMouseX, (int) pMouseY);
+        ItemStack stack = menu.getCarried();
+        ControllerComponent<?> carriedComponent = stack == ItemStack.EMPTY ? null : ControllerComponents.fromItem(stack.getItem());
+        
+        if (isValidCellPos(cellPos) && carriedComponent != null) {
+            menu.placeComponent(cellPos, carriedComponent);
+            return true;
+        }
+        return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
     
     private Pair<Integer, Integer> screenToCellPos(int mouseX, int mouseY) {

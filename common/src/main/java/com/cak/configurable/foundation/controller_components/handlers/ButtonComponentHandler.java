@@ -21,7 +21,6 @@ public class ButtonComponentHandler extends ComponentHandler<ButtonComponentAnim
     
     @Override
     public CompoundTag addToInitialTag(CompoundTag newTag) {
-        newTag.putBoolean("boolean", false);
         return newTag;
     }
     

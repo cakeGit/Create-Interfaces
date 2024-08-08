@@ -1,8 +1,10 @@
 package com.cak.configurable.foundation.controller_components;
 
+import com.cak.configurable.content.configurable_controller.menu.PlacedComponentSubMenu;
 import com.jozufozu.flywheel.util.Pair;
 import net.minecraft.nbt.CompoundTag;
 
+import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -59,6 +61,13 @@ public class ControllerComponent<T extends ComponentAnimator> {
         CompoundTag newTag = new CompoundTag();
         newTag.putString("name", component.getName());
         return component.getHandler().addToInitialTag(newTag);
+    }
+    
+    public static void writePlacedComponentsToTag(ArrayList<PlacedComponentSubMenu> components, CompoundTag tag) {
+        tag.putInt("count", components.size());
+        for (int i = 0; i < components.size(); i++) {
+            tag.put("component_" + i, components.get(i).getTag());
+        }
     }
     
     public static Pair<Integer, Integer> getPositionOfComponent(CompoundTag tag) {
