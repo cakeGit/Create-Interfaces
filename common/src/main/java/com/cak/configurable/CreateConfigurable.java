@@ -16,6 +16,7 @@ public class CreateConfigurable {
         LOGGER.info("{} initializing! Create version: {}", NAME, Create.VERSION);
         OMRegistry.init();
         ControllerComponents.register();
+        PlatformPackets.registerPackets();
         PlatformPackets.getChannel().initServerListener();
     }
 

@@ -1,6 +1,8 @@
 package com.cak.configurable.network.fabric;
 
 
+import com.cak.configurable.CreateConfigurable;
+import com.cak.configurable.network.packet.PlaceControllerComponentPacket;
 import com.simibubi.create.foundation.networking.SimplePacketBase;
 import me.pepperbell.simplenetworking.S2CPacket;
 import me.pepperbell.simplenetworking.SimpleChannel;
@@ -12,24 +14,24 @@ import net.minecraft.world.level.Level;
 
 import java.util.function.Function;
 
-public enum PatternSchematicPackets {
-    COMPONENT_PLACED(C.class, PatternSchematicSyncPacket::new, SimplePacketBase.NetworkDirection.PLAY_TO_SERVER);
+public enum FabricPackets {
+    COMPONENT_PLACED(PlaceControllerComponentPacket.class, PlaceControllerComponentPacket::new, SimplePacketBase.NetworkDirection.PLAY_TO_SERVER);
     
-    public static final ResourceLocation CHANNEL_NAME = PatternSchematics.asResource("main");
+    public static final ResourceLocation CHANNEL_NAME = CreateConfigurable.asResource("main");
     public static final int NETWORK_VERSION = 3;
     public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
     private static SimpleChannel channel;
     
     private PacketType<?> packetType;
     
-    <T extends SimplePacketBase> PatternSchematicPackets(Class<T> type, Function<FriendlyByteBuf, T> factory,
-                                                         SimplePacketBase.NetworkDirection direction) {
+    <T extends SimplePacketBase> FabricPackets(Class<T> type, Function<FriendlyByteBuf, T> factory,
+                                               SimplePacketBase.NetworkDirection direction) {
         packetType = new PacketType<>(type, factory, direction);
     }
     
     public static void registerPackets() {
         channel = new SimpleChannel(CHANNEL_NAME);
-        for (PatternSchematicPackets packet : values())
+        for (FabricPackets packet : values())
             packet.packetType.register();
     }
     
